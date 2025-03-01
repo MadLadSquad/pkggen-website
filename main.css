@@ -94,12 +94,34 @@ nav a {
 	display: block;
 }
 
+#features-showcase {
+	margin-top: 4rem;
+	margin-bottom: 4rem;
+}
+
 .split-showcase .sp-description {
 	margin: auto;
 }
 
 .split-showcase div pre {
 	overflow: hidden;
+}
+
+.split-showcase {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+@media (max-width: 500px) {
+	.split-showcase {
+		grid-auto-flow: dense;
+	}
+	.split-showcase-reverse div:nth-child(odd) {
+		order: 2;
+	}
+	.split-showcase-reverse div:nth-child(even) {
+		order: 1;
+	}
 }
 
 #pkggen-logo {
@@ -114,6 +136,11 @@ nav a {
 	margin: auto;
 	width: 75%;
 	height: fit-content;
+	text-align: center;
+}
+
+#main-showcase p {
+	text-align: center;
 }
 
 textarea {
