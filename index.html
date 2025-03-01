@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{{ include Components/head.tmpl.html }}
+		<title>pkggen</title>
+	</head>
+	<body>
+		{{ include Components/header.tmpl.html }}
+		<main>
+			<section id="main-showcase">
+				<img class="centered" id="pkggen-logo" src="./pkggen-logo.svg"/>
+				<p class="centered">pkggen is a powerful toolkit for automatically generating, testing and deploying desktop packages in multiple formats for multiple package repositories</p>
+			</section>
+
+			<section id="features-showcase">
+				<div>
+					<h3>Ready to use</h3>
+					<p>Generators for popular platforms, such as GitHub and GitLab are already bundled</p>
+				</div>
+				<div>
+					<h3>CI-ready</h3>
+					<p>pkggen is designed to be easy to work with in CI workflows</p>
+				</div>
+				<div>
+					<h3>Extensible</h3>
+					<p>A generator can be implemented in any language with JSON support</p>
+				</div>
+				<div>
+					<h3>Simplistic interface</h3>
+					<p>Go through the entire generation, testing and deployment pipeline in only 3 CLI commands</p>
+				</div>
+			</section>
+
+			<section class="split-showcase">
+				<div>
+					<pre class="sourceCode yaml"><code class="sourceCode yaml">pkggen:
+  generator: github
+  packages:
+	- myproject:
+	  github:
+		username: example
+		repo: myproject
+		query: releases
+		tarballs: [ "{{ raw {{ pkgname }}}}.tar.gz" ]</code></pre>
+				</div>
+
+				<div class="sp-description">
+					<h3>Define your project's metadata</h3>
+					<p>Define your project's metadata and generation method in simple YAML format</p>
+				</div>
+			</section>
+
+			<section class="split-showcase">
+				<div class="sp-description">
+					<h3>Templateize your packages</h3>
+					<p>Convert your current packages to Jinja-like templates</p>
+				</div>
+				
+				<div>
+					<pre class="sourceCode bash"><code class="sourceCode bash">...
+DESCRIPTION="{{ raw {{ description }}}}"
+HOMEPAGE="{{ raw {{ homepage }}}}"
+SRC_URI="{{ raw {{ uris[0].uri }}
+{{ uris[1].uri }}}}"
+...</code></pre>
+				</div>
+			</section>
+
+			<section class="split-showcase">
+				<div>
+					<pre class="sourceCode no-highlight"><code class="sourceCode no-highlight">user $ pkggen
+Downloading tarball... ✅
+Generating ebuild... ✅
+Generating rpm... ✅
+Generating deb... ✅
+Generating pkgbuild... ✅
+Successfully generated packages ✅</code></pre>
+				</div>
+				
+				<div class="sp-description">
+					<h3>Generate your packages</h3>
+					<p>Generate all your packages with a single command</p>
+				</div>
+			</section>
+
+			<section class="split-showcase">
+				<div class="sp-description">
+					<h3>Test your packages</h3>
+					<p>pkggen can automatically spin up LXD/Incus containers and virtual machines to enable testing on any platform</p>
+				</div>
+				
+				<div>
+					<pre class="sourceCode no-highlight"><code class="sourceCode no-highlight">user $ pkggen test
+Spinning up virtual machine... ✅
+Spinning up containers... ✅
+Building in parallel...
+...
+Testing done! Results:
+Success: ebuild ✅
+Success: rpm ✅
+Success: deb ✅
+Failed: pkgbuild ❌</code></pre>
+				</div>
+			</section>
+
+			<section class="split-showcase">
+				<div>
+					<pre class="sourceCode no-highlight"><code class="sourceCode no-highlight">user $ pkggen push
+Generating ebuild... ✅
+Generating rpm... ✅
+Generating deb... ✅
+Generating pkgbuild... ✅
+Successfully generated packages ✅
+Pushing to MyOverlay Gentoo overlay... ✅
+Pushing to MyPPA PPA... ✅
+Pushing to AUR ✅</code></pre>
+				</div>
+				
+				<div class="sp-description">
+					<h3>Deploy your packages</h3>
+					<p>Once all tests succeed, pkggen can use credentials from the metadata file to automatically push to a package repository with support for Gentoo Overlays, Ubuntu PPAs and the AUR</p>
+				</div>
+			</section>
+
+			<section class="showcase-contributing">
+				<h1>Get involved</h1>
+				<p>Anybody can easily create and contribute a generator and deployment agent in their favourite language!</p>
+				<p>Check out <a href="https://github.com/MadLadSquad/pkggen">our GitHub repository</a> for the source code and issue tracker!</p>
+			</section>
+
+			<section class="showcase-final">
+				<h1>So what are you waiting for?</h1>
+				<p>Head to the <a href="./docs.html">documentation</a> to learn more about pkggen!</p>
+			<section>
+		</main>
+		{{ include Components/footer.tmpl.html }}
+	</body>
+	<script src="./index.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+	<script>hljs.highlightAll();</script>
+</html>

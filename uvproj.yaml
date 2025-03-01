@@ -1,0 +1,24 @@
+localhost-commands:
+  - "find ./ -type f \\( -iname \\*.html -o -iname \\*.js \\) -exec sed -i 's/\\.\\//http:\\/\\/localhost:8080\\//g' {} \\;"
+  - "find ./ -type f \\( -iname \\*.html -o -iname \\*.js \\) -exec sed -i 's/https:\\/\\/pkggen.madladsquad.com\\//http:\\/\\/0.0.0.0:8080\\//g' {} \\;"
+  - "python3 -m http.server 8080"
+custom-pre-generation-commands:
+  - "../generate-html.sh build/"
+allowed-extensions:
+  - html
+  - js
+  - yaml
+  - yml
+filename-blacklist:
+  - .git
+  - UBTCustomFunctions
+  - UVKBuildTool
+  - .github
+  - .idea
+  - .vs
+  - Translations
+intermediate-extensions:
+  - .tmpl.html
+variables:
+  - var: trademark
+    val: pkggen

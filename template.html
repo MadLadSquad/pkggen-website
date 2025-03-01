@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{{ include Components/head.tmpl.html }}
+		<title>$title$</title>
+	</head>
+	<body>
+		{{ include Components/header.tmpl.html }}
+		<main>
+$body$
+		</main>
+		{{ include Components/footer.tmpl.html }}
+	</body>
+	<script src="./index.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark-reasonable.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+	<script>hljs.highlightAll();</script>
+</html>

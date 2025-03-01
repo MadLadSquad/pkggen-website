@@ -1,0 +1,71 @@
+name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+        with:
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+          lfs: false
+          submodules: true
+          clean: false
+          fetch-depth: 0
+      - name: Checkout submodules
+        shell: bash
+        run: |
+          git submodule sync --recursive
+          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+      - name: Update deps
+        run: "sudo apt update && sudo dpkg -i \"./$(./get-latest-pandoc.py)\""
+      - run: "echo 'run-localhost-automatically: false' >> uvproj.yaml"
+      - run: sudo apt install libyaml-cpp-dev
+      - name: Build project
+        run: cd UVKBuildTool/ && ./setup-web.sh .. && cd build && cd ../../ && ./run.sh
+      - run: ./ci-clean.sh
+      - run: npm install -g terser
+      - run: npm install -g csso-cli
+      - run: npm install -g html-minifier
+      - run: for i in ./*.js; do terser $i --compress -o $i; done
+      - run: for i in ./*.css; do csso $i -o $i; done
+      - name: Change URLs to production mode
+        run: |
+          find ./ -type f \( -iname \*.html -o -iname \*.js \) -exec sed -i 's/\/index\.html//g' {} \;
+          find ./ -type f \( -iname \*.html -o -iname \*.js \) -exec sed -i 's/\.html//g' {} \;
+          find ./ -type f \( -iname \*.html -o -iname \*.js \) -exec sed -i 's/\.\//https:\/\/pkggen.madladsquad.com\//g' {} \;
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
