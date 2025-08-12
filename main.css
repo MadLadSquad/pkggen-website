@@ -61,7 +61,6 @@ nav {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	float: left;
 	flex-wrap: wrap;
 	margin: 20px 0 20px 0;
 }
