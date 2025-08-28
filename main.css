@@ -126,6 +126,7 @@ nav a {
 #pkggen-logo {
 	display: block;
 	margin: auto;
+	width: 27vw;
 	min-width: 160px;
 	min-height: 160px;
 }
