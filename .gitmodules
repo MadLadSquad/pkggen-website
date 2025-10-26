@@ -1,3 +1,6 @@
 [submodule "UVKBuildTool"]
 	path = UVKBuildTool
 	url = https://github.com/MadLadSquad/UVKBuildTool
+[submodule "docs"]
+	path = docs
+	url = https://github.com/MadLadSquad/pkggen.wiki.git

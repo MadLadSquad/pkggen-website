@@ -32,6 +32,7 @@ jobs:
         run: |
           git submodule sync --recursive
           git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+      - run: ./generate-docs.sh
       - name: Update deps
         run: "sudo apt update && sudo dpkg -i \"./$(./get-latest-pandoc.py)\""
       - run: "echo 'run-localhost-automatically: false' >> uvproj.yaml"
