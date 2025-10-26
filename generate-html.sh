@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 if [[ "$1" == "" ]]; then
 	mkdir build &> /dev/null || (rm -rf build && mkdir build)
-	cp *.md blog/ -r
+	cp *.md docs/ build/ -r
 	cd build/ || exit
 fi
 
