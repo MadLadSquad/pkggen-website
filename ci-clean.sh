@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 rm -rf *.md
-rm -rf docs/*.md
-rm -rf Components/ UBTCustomFunctions/ .github/ blog/
+rm -rf Components/ UBTCustomFunctions/ .github/ docs/
 mv build/*.html .
 mv build/*/ .
 rm -rf build/ UVKBuildTool/
