@@ -13,13 +13,30 @@
 	--code-background-colour: #282a36;
 }
 
+/* System/browser-independent emoji rendering via the Twemoji colour font.
+   The `unicode-range` restricts this font to emoji codepoints only, so ASCII
+   digits, '#' and '*' (which the font also contains, for keycap emoji) keep
+   using the normal text/monospace fonts. Because of the range, the browser
+   only downloads the ~480 KB font on pages that actually contain an emoji. */
+@font-face {
+	font-family: "Twemoji Mozilla";
+	src: url("TwemojiMozilla.woff2") format("woff2");
+	font-display: swap;
+	unicode-range:
+		U+203C, U+2049, U+2139, U+2194-2199, U+21A9-21AA, U+231A-231B,
+		U+2328, U+23CF, U+23E9-23F3, U+23F8-23FA, U+24C2, U+25AA-25AB,
+		U+25B6, U+25C0, U+25FB-25FE, U+2600-26FF, U+2700-27BF, U+2934-2935,
+		U+2B00-2BFF, U+3030, U+303D, U+3297, U+3299, U+FE0F,
+		U+1F000-1FAFF, U+1F1E6-1F1FF;
+}
+
 html {
 	padding: 0;
 	margin: 0
 }
 
 body {
-	font-family: Ubuntu, sans-serif;
+	font-family: Ubuntu, "Twemoji Mozilla", sans-serif;
 	margin: auto;
 	padding: 20px;
 	max-width: 1024px;
@@ -177,6 +194,10 @@ img {
 }
 
 code {
+  /* Twemoji is listed first, but its `unicode-range` limits it to emoji, so
+     all monospaced text/digits still fall through to the monospace font while
+     emoji (e.g. the ✅/❌ in the terminal examples) render via Twemoji. */
+  font-family: "Twemoji Mozilla", monospace;
   padding: 2px 5px;
   color: var(--code-text-colour);
   background-color: var(--code-background-colour);

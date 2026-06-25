@@ -33,3 +33,4 @@ cpus=$(grep -c processor /proc/cpuinfo) || cpus=$(sysctl -n hw.ncpu)
 find ./ -type f -name '*.md' -printf '%p\n' | parallel -j "${cpus}" extract || exit
 
 cp ../main.css .
+cp ../TwemojiMozilla.woff2 .
