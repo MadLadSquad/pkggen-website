@@ -6,7 +6,17 @@ if [[ "$1" == "" ]]; then
 fi
 
 extract() {
-	title=$(grep "# " "$1" | head -1 | sed 's/[^ ]* //')
+	# Try H1 header first
+	title=$(grep -E "^# " "$1" | head -1 | sed 's/^# //')
+	# If no H1, try lower-level headers
+	if [[ -z "$title" ]]; then
+		title=$(grep -E "^##+ " "$1" | head -1 | sed -E 's/^##+ //')
+	fi
+	# If still empty, fall back to capitalized filename (removes hyphens/underscores/leading spaces)
+	if [[ -z "$title" ]]; then
+		title=$(basename "$1" .md | tr '-' ' ' | tr '_' ' ' | sed 's/^ *//')
+	fi
+
 	out_dir=$(echo `dirname $1`/`basename $1 md`html 2> /dev/null)
 
 	echo "Processing file: ${out_dir}"

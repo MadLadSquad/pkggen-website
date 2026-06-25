@@ -1,9 +1,10 @@
 #pragma once
 #ifdef UBT_TARGET_WEB
-#include "../Utils.hpp"
+#include "../../Uniform/UniformUtility.h"
+#include <Generator.hpp>
 
 namespace UBT
 {
-    UBT_PUBLIC_API void funcExportMain(UTTE::Generator& generator) noexcept;
+    void funcExportMain(UTTE::Generator& generator) noexcept;
 }
 #endif
