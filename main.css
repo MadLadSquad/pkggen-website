@@ -307,9 +307,22 @@ figcaption > p {
 }
 
 #err-404-emoji {
-	font-size: 14vw;
-	text-align: center !important;
-	margin: auto;
+	/* The kaomoji is an inline SVG so it scales to exactly fill the content
+	   column (the body width) on every screen, regardless of font metrics.
+	   Tune the viewBox height in the markup to make it thicker/thinner. */
+	margin: 0 auto;
+}
+
+#err-404-emoji svg {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+#err-404-emoji text {
+	fill: var(--header-text-colour);
+	font-family: Ubuntu, sans-serif;
+	font-size: 80px;
 }
 
 #err-404-text {

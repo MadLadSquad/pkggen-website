@@ -9,7 +9,11 @@
 	<body>
 		{{ include Components/header.tmpl.html }}
 		<main class="centered">
-			<h1 id="err-404-emoji">\(o_o)/</h1>
+			<h1 id="err-404-emoji" aria-label="Confused shrug">
+				<svg viewBox="0 0 300 110" role="img" aria-hidden="true">
+					<text x="150" y="80" text-anchor="middle" textLength="290" lengthAdjust="spacingAndGlyphs">\(o_o)/</text>
+				</svg>
+			</h1>
 			<h1 id="err-404-text">Unfortunately, this page doesn't exist 😔</h1>
 			<br>
 		</main>
