@@ -1,0 +1,8 @@
+<header>
+	<nav id="main-page-header">
+		<a href="{{ "/" | relURL }}" class="title" id="pkggen-name"><h1>{{ site.Title }}</h1></a>
+		{{- range site.Menus.main }}
+		<a href="{{ .URL | relURL }}">{{ .Name }}</a>
+		{{- end }}
+	</nav>
+</header>

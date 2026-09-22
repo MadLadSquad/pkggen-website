@@ -1,0 +1,12 @@
+{{- /* Rewrites GitHub wiki URLs to local /docs/ paths. Replaces the sed in the
+       old generate-docs.sh. Takes a string, returns the rewritten string. */ -}}
+{{- $s := . -}}
+{{- $re := printf `%s/[A-Za-z0-9._%%-]+` site.Params.wikiBase -}}
+{{- range $m := findRE $re $s -}}
+  {{- $slug := lower (path.Base $m) -}}
+  {{- $url := cond (eq $slug "home") "/docs/" (printf "/docs/%s/" $slug) -}}
+  {{- $s = replace $s $m ($url | relURL) -}}
+{{- end -}}
+{{- /* A bare link to the wiki root maps to the docs index. */ -}}
+{{- $s = replace $s site.Params.wikiBase ("/docs/" | relURL) -}}
+{{- return $s -}}

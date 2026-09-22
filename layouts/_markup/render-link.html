@@ -1,0 +1,3 @@
+{{- /* Keeps links to the pkggen GitHub wiki pointing at this site's own docs. */ -}}
+{{- $dest := partial "wiki-url.html" .Destination -}}
+<a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text }}</a>

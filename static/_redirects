@@ -1,0 +1,9 @@
+# The old GitHub Pages build produced capitalised, extensionless doc URLs.
+# Hugo's pretty URLs are lowercase, so keep the old links working.
+/docs/Home                      /docs/                           301
+/docs/GitHub-generator          /docs/github-generator/          301
+/docs/Setting-up-your-metadata  /docs/setting-up-your-metadata/  301
+/docs/The-URL-generator         /docs/the-url-generator/         301
+/docs/Artifact-generators       /docs/artifact-generators/       301
+/docs/_Sidebar                  /docs/                           301
+/docs/_Footer                   /docs/                           301

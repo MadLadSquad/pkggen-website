@@ -1,0 +1,7 @@
+{{- /* The pkggen wiki pages carry no front matter, so fall back to a title
+       derived from the filename, keeping the wiki's own casing. */ -}}
+{{- $t := .Title -}}
+{{- if and (not $t) .File -}}
+  {{- $t = replaceRE `[-_]+` " " .File.ContentBaseName -}}
+{{- end -}}
+{{- return (or $t site.Title) -}}

@@ -1,0 +1,66 @@
+baseURL         = "https://pkggen.madladsquad.com/"
+locale          = "en-us"
+title           = "pkggen"
+enableRobotsTXT = true
+disableKinds    = ["taxonomy", "term", "rss"]
+
+# The wiki pages carry no front matter and Hugo no longer derives a title from
+# the filename, so layouts/_partials/page-title.html does it instead, preserving
+# the wiki author's own casing ("GitHub-generator" -> "GitHub generator").
+
+# The docs/ submodule is the pkggen GitHub wiki. It is mounted into the content
+# tree rather than copied, so the wiki stays the single source of truth.
+# Declaring any content mount replaces Hugo's default one, hence the first entry.
+[[module.mounts]]
+  source = "content"
+  target = "content"
+
+[[module.mounts]]
+  source = "docs"
+  target = "content/docs"
+  # _Sidebar.md is rendered by layouts/_partials/docs-sidebar.html instead of
+  # being published as a page; _Footer.md is unused by the website.
+  files = ["! _Sidebar.md", "! _Footer.md", "! Home.md"]
+
+[[module.mounts]]
+  source = "docs/Home.md"
+  target = "content/docs/_index.md"
+
+# Home.md has no front matter, so without this the section would be titled "Docs".
+[[cascade]]
+  title = "Documentation"
+  [cascade.target]
+    path = "/docs"
+
+[markup]
+  [markup.highlight]
+    noClasses   = false   # emit classes so assets/css/chroma.css applies
+    guessSyntax = false   # leave unlabelled fences (the ASCII tree) alone
+    tabWidth    = 4
+    wrapperClass = "highlight"
+  [markup.goldmark.renderer]
+    unsafe = true         # parity with pandoc --from=gfm
+
+[params]
+  description = "A drop-in replacement for your entire desktop packaging and deployment pipeline. Generate, test, and publish packages for Linux (RPM, DEB, PKGBUILD, Ebuild) and macOS (Homebrew)."
+  keywords    = "madladsquad, MadLadSquad, package, packaging, desktop packaging, desktop packages, rpm, deb, pkgbuild, ebuild, linux, fedora, red hat, debian, ubuntu, ppa, arch, gentoo, funtoo, void, arch linux, gentoo linux, void linux, package generator, package generation, desktop package generator, desktop package generation, package tests, package testing, desktop package tests, desktop package testing, macos, homebrew, brew, python, autogen, doit, package deployment, desktop package deployment, aur"
+  author      = "MadLadSquad"
+  themeColor  = "#1d1f27"
+  wikiBase    = "https://github.com/MadLadSquad/pkggen/wiki"
+
+[[menu.main]]
+  name   = "Home"
+  url    = "/"
+  weight = 10
+[[menu.main]]
+  name   = "Documentation"
+  url    = "/docs/"
+  weight = 20
+[[menu.main]]
+  name   = "Community"
+  url    = "/community/"
+  weight = 30
+[[menu.main]]
+  name   = "To MadLadSquad"
+  url    = "https://madladsquad.com"
+  weight = 40

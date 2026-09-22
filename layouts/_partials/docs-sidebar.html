@@ -1,0 +1,13 @@
+{{- /* Renders the pkggen wiki's own _Sidebar.md as the docs navigation.
+       The wiki stays the source of truth for nav order, nesting, and which
+       pages are still unwritten (those entries are plain text, not links).
+       The old pipeline appended this list to the bottom of every page. */ -}}
+{{- $src := os.ReadFile "docs/_Sidebar.md" -}}
+{{- $html := partial "wiki-url.html" $src | markdownify -}}
+{{- /* Mark the entry for the page being viewed. */ -}}
+{{- $here := printf `href="%s"` .RelPermalink -}}
+{{- $html = replace $html $here (printf `%s aria-current="page"` $here) -}}
+<aside id="docs-sidebar" aria-label="Documentation navigation">
+	<h2>Documentation</h2>
+	{{ $html | safeHTML }}
+</aside>

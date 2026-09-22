@@ -1,0 +1,11 @@
+{{- /* GitHub alerts ("> [!NOTE]"). Goldmark parses these natively and exposes
+       .AlertType; pandoc rendered them as blockquotes containing a literal
+       "[!NOTE]", which looked broken. */ -}}
+{{- if eq .Type "alert" -}}
+<blockquote class="alert alert-{{ .AlertType }}">
+	<p class="alert-heading">{{ or .AlertTitle (title .AlertType) }}</p>
+	{{ .Text }}
+</blockquote>
+{{- else -}}
+<blockquote>{{ .Text }}</blockquote>
+{{- end -}}
