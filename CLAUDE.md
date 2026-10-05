@@ -10,7 +10,8 @@ The static marketing/documentation website for **pkggen** (a universal desktop p
 
 The site ships **no JavaScript** and loads **no third-party resources** — fonts, styles,
 icons and syntax highlighting are all self-hosted or done at build time. Keep it that way:
-it is the basis for the claims in `content/privacy-policy.md`, and for the strict
+it is the basis for the claims in the privacy policy (hosted on madladsquad.com at
+https://madladsquad.com/privacy-policy and linked from the footer), and for the strict
 Content-Security-Policy in `static/_headers`.
 
 ## Setup

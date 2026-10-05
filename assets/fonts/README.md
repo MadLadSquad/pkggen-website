@@ -1,7 +1,8 @@
 # Bundled fonts
 
 These are served from this site's own domain so that no request is made to a
-third-party font host. See `content/privacy-policy.md` §4.
+third-party font host, as promised by the privacy policy at
+<https://madladsquad.com/privacy-policy>.
 
 ## Ubuntu (`ubuntu-*.woff2`)
 

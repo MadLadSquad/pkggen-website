@@ -7,3 +7,7 @@
 /docs/Artifact-generators       /docs/artifact-generators/       301
 /docs/_Sidebar                  /docs/                           301
 /docs/_Footer                   /docs/                           301
+
+# The privacy policy now lives on the main MadLadSquad site.
+/privacy-policy                 https://madladsquad.com/privacy-policy  301
+/privacy-policy/                https://madladsquad.com/privacy-policy  301
